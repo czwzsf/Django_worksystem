@@ -8,67 +8,67 @@ from app01 import models
 
 
 # 服务站管理
-def depart_list(request):
-    value = request.GET.get('query', '')
-    reset_button = request.GET.get('reset')
-    data_dict = {}
-    page = int(request.GET.get('page', 1))
-    page_size = 20
-    start = (page - 1) * page_size
-    end = page * page_size
-
-    # 页码
-    page_str_list = []
-    page_number = models.DepartmentInfo.objects.filter(**data_dict).count()
-    total_page_count, div = divmod(page_number, page_size)
-    if div:
-        total_page_count = total_page_count + 1
-    for i in range(page, page + 6):
-        ele = '<li><a href="?page={}">{}</a></li>'.format(i, i)
-        page_str_list.append(ele)
-    page_string = mark_safe("".join(page_str_list))
-    if value:
-        data_dict['title'] = value
-        queryset = models.DepartmentInfo.objects.filter(**data_dict)[start:end]
-    else:
-        queryset = models.DepartmentInfo.objects.all()[start:end]
-    if reset_button == 0:
-        queryset = models.DepartmentInfo.objects.all()[start:end]
-    return render(request, 'html/Depart/depart_list.html', {"queryset": queryset, "page_string": page_string})
-
-
-def servicestation_list(request):
-    servicestation_list_info = models.ServicestationInfo.objects.all()
-    return render(request, 'html/Depart/servicestation.html', {"servicestation_list_info": servicestation_list_info})
-
-
-def depart_add(request):
-    """添加部门"""
-    if request.method == 'GET':
-        return render(request, 'html/Depart/depart_add.html')
-    # 获取用户提交出来的结果,将其存入到数据库里面
-    elif request.method == 'POST':
-        depart_name = request.POST.get("depart_name")
-        # 保存到数据库
-        models.DepartmentInfo.objects.create(title=depart_name)
-        # 重定向回到部门页面
-        return redirect("/depart/list/")
-
-
-def depart_delete(request):
-    nid = request.GET.get('nid')
-    models.DepartmentInfo.objects.filter(id=nid).delete()
-    return redirect("/depart/list/")
-
-
-def depart_edit(request, nid):
-    """修改部门信息"""
-    if request.method == 'GET':
-        row_object = models.DepartmentInfo.objects.filter(id=nid).first()
-        return render(request, 'html/Depart/depart_edit.html', {'row_object': row_object})
-    depart_edit_name = request.POST.get("depart_edit")
-    models.DepartmentInfo.objects.filter(id=nid).update(title=depart_edit_name)
-    return redirect("/depart/list/")
+# def depart_list(request):
+#     value = request.GET.get('query', '')
+#     reset_button = request.GET.get('reset')
+#     data_dict = {}
+#     page = int(request.GET.get('page', 1))
+#     page_size = 20
+#     start = (page - 1) * page_size
+#     end = page * page_size
+#
+#     # 页码
+#     page_str_list = []
+#     page_number = models.DepartmentInfo.objects.filter(**data_dict).count()
+#     total_page_count, div = divmod(page_number, page_size)
+#     if div:
+#         total_page_count = total_page_count + 1
+#     for i in range(page, page + 6):
+#         ele = '<li><a href="?page={}">{}</a></li>'.format(i, i)
+#         page_str_list.append(ele)
+#     page_string = mark_safe("".join(page_str_list))
+#     if value:
+#         data_dict['title'] = value
+#         queryset = models.DepartmentInfo.objects.filter(**data_dict)[start:end]
+#     else:
+#         queryset = models.DepartmentInfo.objects.all()[start:end]
+#     if reset_button == 0:
+#         queryset = models.DepartmentInfo.objects.all()[start:end]
+#     return render(request, 'html/Depart/depart_list.html', {"queryset": queryset, "page_string": page_string})
+#
+#
+# def servicestation_list(request):
+#     servicestation_list_info = models.ServicestationInfo.objects.all()
+#     return render(request, 'html/Depart/servicestation.html', {"servicestation_list_info": servicestation_list_info})
+#
+#
+# def depart_add(request):
+#     """添加部门"""
+#     if request.method == 'GET':
+#         return render(request, 'html/Depart/depart_add.html')
+#     # 获取用户提交出来的结果,将其存入到数据库里面
+#     elif request.method == 'POST':
+#         depart_name = request.POST.get("depart_name")
+#         # 保存到数据库
+#         models.DepartmentInfo.objects.create(title=depart_name)
+#         # 重定向回到部门页面
+#         return redirect("/depart/list/")
+#
+#
+# def depart_delete(request):
+#     nid = request.GET.get('nid')
+#     models.DepartmentInfo.objects.filter(id=nid).delete()
+#     return redirect("/depart/list/")
+#
+#
+# def depart_edit(request, nid):
+#     """修改部门信息"""
+#     if request.method == 'GET':
+#         row_object = models.DepartmentInfo.objects.filter(id=nid).first()
+#         return render(request, 'html/Depart/depart_edit.html', {'row_object': row_object})
+#     depart_edit_name = request.POST.get("depart_edit")
+#     models.DepartmentInfo.objects.filter(id=nid).update(title=depart_edit_name)
+#     return redirect("/depart/list/")
 
 
 # 用户管理
