@@ -1,0 +1,28 @@
+{% extends 'html/master.html' %}
+{% block title %}
+    <title>用户管理</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div>
+            <a class="btn btn-primary" href="#" style="margin-bottom: 10px">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                新建管理员
+            </a>
+            <a class="btn btn-primary" href="#" style="margin-bottom: 10px">
+                <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                新建管理员ModelForm
+            </a>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">用户列表</div>
+            <table class="table">
+                <th>序号</th>
+                <th>管理员姓名</th>
+                <th>管理员邮箱</th>
+                <th>操作</th>
+
+            </table>
+        </div>
+    </div>
+{% endblock %}
