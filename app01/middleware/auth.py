@@ -7,7 +7,7 @@ class Login_validation(MiddlewareMixin):
 
     def process_requset(self, request):
         # 读取当前访问的用户的session信息，如果能读取到，就可以登入
-        if request.path_info == "/login/":  # 将登入界面排除到中间件判定外，免得重复请求登入
+        if request.path_info in ["/login/", "/iamge/code"]:  # 将登入界面排除到中间件判定外，免得重复请求登入
             return None
         info_dict = request.session.get("info")
         if info_dict:

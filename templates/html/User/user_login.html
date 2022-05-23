@@ -26,18 +26,28 @@
 </head>
 <body>
 <div class="account">
-    <h2>Sign Up</h2>
+    <h2>用户登入</h2>
     <form method="post" novalidate>
         {% csrf_token %}
         <div class="form-group">
-            <label>username</label>
+            <label>用户名称</label>
             {{ form.name }}
             <span style="color: red">{{ form.name.errors.0 }}</span>
         </div>
         <div class="form-group">
-            <label>password</label>
+            <label>用户密码</label>
             {{ form.password }}
             <span style="color: red">{{ form.password.errors.0 }}</span>
+{#            <label for="id_code">图片验证码</label>#}
+{#            <div class="row">#}
+{#                <div class="col-xs-7">#}
+{#                    <input type="text" name="code" class="form-control" , placeholder="请输入验证码" required="" id="id_code">#}
+{#                    <span style="color: red"></span>#}
+{#                </div>#}
+{#                <div class="col-xs-5">#}
+{#                    <img src="/image/code/" id="image_code">#}
+{#                </div>#}
+{#            </div>#}
         </div>
         <input type="submit" value="login" class="btn btn-primary">
     </form>
