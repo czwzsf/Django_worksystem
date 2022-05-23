@@ -170,9 +170,11 @@ def login(request):
     form = LoginForm(data=request.POST)
     if form.is_valid():
         user_object = models.UserInfo.objects.filter(**form.cleaned_data).first()
-        if not user_object:
+        if not user_object:  # 查看是否找到了用户模型
             form.add_error('password', 'password or username is error')
             return render(request, 'html/User/user_login.html', {'form': form})
+        # 用户名与密码正确
+        # 用户生成随机字符串；写到用户浏览器的cookie中去
         return redirect('/user/list/')
     else:
         return render(request, 'html/User/user_login.html', {'form': form})
