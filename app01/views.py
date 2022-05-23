@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django import forms
-
-# Create your views here.
 from django.utils.safestring import mark_safe
 from templates.utils import bootstrap
 from app01 import models
+# Create your views here.
+
 
 
 # 服务站管理
@@ -77,6 +77,9 @@ def user_list(request):
     # 获取用户数据
     # 检查用户是否已经登入
     # 用户发来请求，检查cookies随机字符串，查看session中有没有相对应的
+    info = request.session.get("info")
+    if not info:
+        return redirect('/login/')
     user_list_info = models.UserInfo.objects.all()
     return render(request, 'html/User/user_list.html', {"user_list_info": user_list_info})
 
