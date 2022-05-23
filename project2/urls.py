@@ -33,7 +33,7 @@ urlpatterns = [
     path('user/<int:nid>/edit', views.user_edit),
     path('user/delete/', views.user_delete),
     # 管理员管理
-    path('admin/list', views.admin_list),
+    path('admin/list/', views.admin_list),
     # user_login
     path('login/', views.login),
 ]

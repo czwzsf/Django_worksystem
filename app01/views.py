@@ -75,6 +75,8 @@ from app01 import models
 def user_list(request):
     """用户管理 - 列表"""
     # 获取用户数据
+    # 检查用户是否已经登入
+    # 用户发来请求，检查cookies随机字符串，查看session中有没有相对应的
     user_list_info = models.UserInfo.objects.all()
     return render(request, 'html/User/user_list.html', {"user_list_info": user_list_info})
 
@@ -179,5 +181,4 @@ def login(request):
         request.session["info"] = {'id': user_object.id, 'name': user_object.name}
         return redirect('/user/list/')
     else:
-
         return render(request, 'html/User/user_login.html', {'form': form})
