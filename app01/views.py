@@ -175,8 +175,7 @@ def login(request):
             return render(request, 'html/User/user_login.html', {'form': form})
         # 用户名与密码正确
         # 用户生成随机字符串；写到用户浏览器的cookie中去
-
-
+        request.session["info"] = user_object.name
         return redirect('/user/list/')
     else:
         return render(request, 'html/User/user_login.html', {'form': form})
