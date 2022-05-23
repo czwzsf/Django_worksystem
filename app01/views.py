@@ -3,8 +3,9 @@ from django import forms
 from django.utils.safestring import mark_safe
 from templates.utils import bootstrap
 from app01 import models
-# Create your views here.
 
+
+# Create your views here.
 
 
 # 服务站管理
@@ -185,3 +186,9 @@ def login(request):
         return redirect('/user/list/')
     else:
         return render(request, 'html/User/user_login.html', {'form': form})
+
+
+def logout(request):
+    """注销"""
+    request.session.clear()  # 清除掉当前用户的session信息
+    return redirect('/login/')
