@@ -178,6 +178,5 @@ def login(request):
         # 将cookies写入
         request.session["info"] = {'id': user_object.id, 'name': user_object.name}
         return redirect('/user/list/')
-
     else:
         return render(request, 'html/User/user_login.html', {'form': form})
