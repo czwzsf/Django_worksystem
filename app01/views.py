@@ -221,5 +221,6 @@ def MIS(request):
 
 @csrf_exempt
 def mis_test(request):
+    print(request.POST)
     data_dict = {'status': True, 'data': [11, 22, 33, 44]}
     return JsonResponse(data_dict)
