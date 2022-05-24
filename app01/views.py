@@ -1,14 +1,14 @@
-from django.forms import ModelForm
-from django.shortcuts import render, redirect, HttpResponse
+import json
+
 from django import forms
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-from django.utils.safestring import mark_safe
-from templates.utils import bootstrap
-from app01 import models
-from templates.code.verificationcode import check_code
-from io import BytesIO
+from django.forms import ModelForm
 from django.forms import widgets
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from app01 import models
+from templates.utils import bootstrap
 
 
 # Create your views here.
@@ -169,12 +169,25 @@ def admin_list(request):
     return render(request, 'html/admin/admin_list.html', context)
 
 
-class LoginForm(bootstrap.BootStrapForm):
-    name = forms.CharField(label='username', widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
-    password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={"class": "form-control"}),
-                               required=True)
+class LoginForm(UserModelForm):
+    # name = forms.CharField(label='username', widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
+    # password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={"class": "form-control"}),
+    #                            required=True)
     # image_code = forms.CharField(label='image_code', widget=forms.TextInput(), required=True)
+    class Meta:
+        model = models.UserInfo
+        fields = {"name", "password"}
 
+
+# class LoginForm(bootstrap.BootStrapModelForm):
+#     # name = forms.CharField(label='username', widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
+#     # password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={"class": "form-control"}),
+#     #                            required=True)
+#     # image_code = forms.CharField(label='image_code', widget=forms.TextInput(), required=True)
+#     class Meta:
+#         model = models.UserInfo
+#         fields = {"name", "password"}
+#
 
 def login(request):
     if request.method == "GET":
@@ -233,10 +246,10 @@ class TaskModelForm(ModelForm):
         model = models.Task
         fields = "__all__"
         widgets = {
-            "level": widgets.Select(attrs={'class': 'form-control', 'size': 1}),
+            "level": widgets.Select(attrs={'class': 'form-control'}),
             "title": widgets.TextInput(attrs={'class': 'form-control'}),
-            "detail": widgets.Textarea(attrs={'class': 'form-control'}),
-            "user": widgets.Select(attrs={'class': 'form-control', 'size': 1})
+            "detail": widgets.TextInput(attrs={'class': 'form-control'}),
+            "user": widgets.Select(attrs={'class': 'form-control'})
         }
 
 
@@ -244,3 +257,17 @@ class TaskModelForm(ModelForm):
 def task(request):
     form = TaskModelForm()
     return render(request, 'html/taskmanagement/task.html', {"form": form})
+
+
+@csrf_exempt
+def task_add(request):
+    print(request.POST)
+    # 表单请求校验
+    form = TaskModelForm(data=request.POST)
+    if form.is_valid():
+        form.save()
+        data_dict = {"status": True}
+        return JsonResponse(data_dict)
+    data_dict = {"status": False, "error": form.errors}
+    return JsonResponse(data_dict)
+

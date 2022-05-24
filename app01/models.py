@@ -102,6 +102,7 @@ class claimdata(models.Model):
 class Task(models.Model):
     """项目管理"""
     level_choices = (
+        (0,""),
         (1, "紧急"),
         (2, "临时"),
         (3, "重要"),

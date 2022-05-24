@@ -6,20 +6,53 @@
     <div class="panel panel-default">
         <div class="panel-heading">任务创建模组</div>
         <div class="panel-body">
-            <form method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                    <div class="form-group">
-                        <label>{{ field.label }}</label>
-                        {{ field }}
-                    </div>
-                {% endfor %}
-                <button type="submit" class="btn btn-primary">建立</button>
+            <form method="post" id="formadd" >
+                <div class="clearfix">
+                    {% for field in form %}
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>{{ field.label }}</label>
+                                {{ field }}
+                                <span style="color: red">{{ field.errors.0 }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-xs-12">
+                    <button id="btnadd" type="submit" class="btn btn-primary">建立</button>
+                </div>
             </form>
         </div>
         <div class="panel-footer">Panel footer</div>
     </div>
 {% endblock %}
 {% block js %}
+    <script type="text/javascript">
 
+        $(function () {
+            bindBtnaddEvent();
+        })
+
+        function bindBtnaddEvent() {
+            $("#btnadd").click(function () {
+                $.ajax({
+                    url: '/task/add/',
+                    type: "post",
+                    data: $("#formadd").serialize(),
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.status) {
+                            {#console.log("添加成功！！");#}
+                            alert("添加成功");
+                        } else {
+                            $.each(res.error, function (name, data) {
+                                console.log("cuole1");
+                                {#$("#id_" + name).next().text(data[0]);#}
+                            })
+                        }
+                    }
+                })
+            })
+        }
+    </script>
 {% endblock %}

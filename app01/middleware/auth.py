@@ -1,5 +1,5 @@
+from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
-from django.shortcuts import HttpResponse, redirect
 
 
 class Login_validation(MiddlewareMixin):
