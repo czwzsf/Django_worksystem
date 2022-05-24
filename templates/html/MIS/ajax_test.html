@@ -1,8 +1,48 @@
 {% extends 'html/master.html' %}
 {% block title %}
-    MIS计算系统
+    <title>MIS计算系统</title>
 {% endblock %}
-
 {% block content %}
-
+    <h1>MIS计算</h1>
+    <h3>提交</h3>
+    <input id="btn1" type="button" class="btn btn-primary" value="点击" onclick="clickMe()">
 {% endblock %}
+{% block js %}
+    <script type="text/javascript">
+        function clickMe() {
+            $.ajax({
+                url: '/MIS/test/',
+                type: "post",
+                data: {
+                    n1: 123,
+                    n2: 456,
+                },
+                success: function (res) {
+                    console.log(res);
+                }
+            })
+        }
+    </script>
+{% endblock %}
+
+{##}
+{#       $(function () {#}
+{#            //页面框架加载完成之后代码自动执行下面的函数#}
+{#            bindBtnEvent();#}
+{#        })#}
+{##}
+{#        function bindBtnEvent() {#}
+{#            $("btn1").click(function () {#}
+{#                $.ajax({#}
+{#                    url: '/MIS/test/',#}
+{#                    type: "post",#}
+{#                    data: {#}
+{#                        n1: 123,#}
+{#                        n2: 456,#}
+{#                    },#}
+{#                    success: function (res) {#}
+{#                        console.log(res);#}
+{#                    }#}
+{#                })#}
+{#            })#}
+{#        }#}

@@ -26,3 +26,84 @@ $.ajax({
 })
 ```
 
+### GET请求模板
+
+```javascript
+    <script type="text/javascript">
+        function clickMe() {
+            $.ajax({
+                url: '/MIS/test/',
+                type: "get",
+                data: {
+                    n1: 123,
+                    n2: 456,
+                },
+                success: function (res) {
+                    console.log(res);
+                }
+            })
+        }
+    </script>
+```
+
+```python
+def mis_test(request):
+    print(request.GET)
+    return HttpResponse("成功了！")
+
+```
+
+### POST请求模板
+
+使用`from django.views.decorators.csrf import csrf_exempt`的`csrf_exempt`来免除`csrf_token`
+
+```python
+@csrf_exempt
+def mis_test(request):
+    print(request.POST)
+    return HttpResponse("成功了！")
+```
+
+```javascript
+    <script type="text/javascript">
+        function clickMe() {
+            $.ajax({
+                url: '/MIS/test/',
+                type: "post",
+                data: {
+                    n1: 123,
+                    n2: 456,
+                },
+                success: function (res) {
+                    console.log(res);
+                }
+            })
+        }
+    </script>
+```
+
+jQuery版本
+
+```javascript
+				$(function () {
+            //页面框架加载完成之后代码自动执行下面的函数
+            bindBtnEvent();
+        })
+
+        function bindBtnEvent() {
+            $("btn1").click(function () {
+                $.ajax({
+                    url: '/MIS/test/',
+                    type: "post",
+                    data: {
+                        n1: 123,
+                        n2: 456,
+                    },
+                    success: function (res) {
+                        console.log(res);
+                    }
+                })
+            })
+        }
+```
+

@@ -37,4 +37,7 @@ urlpatterns = [
     # user_login
     path('login/', views.login),
     path('logout/', views.logout),
+    # MIS计算与文件上传功能
+    path('MIS/', views.MIS),
+    path('MIS/test/', views.mis_test),
 ]

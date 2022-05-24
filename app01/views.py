@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django import forms
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.safestring import mark_safe
 from templates.utils import bootstrap
 from app01 import models
@@ -202,8 +203,8 @@ def logout(request):
     """注销"""
     request.session.clear()  # 清除掉当前用户的session信息
     return redirect('/login/')
-#
-#
+
+
 # def image_code(request):
 #     # 生成图片验证码
 #     img, code_string = check_code()
@@ -213,3 +214,11 @@ def logout(request):
 #     stream = BytesIO()
 #     img.save(stream, 'png')
 #     return HttpResponse(stream.getvalue())
+def MIS(request):
+    return render(request, 'html/MIS/ajax_test.html')
+
+
+@csrf_exempt
+def mis_test(request):
+    print(request.POST)
+    return HttpResponse("成功了！")
