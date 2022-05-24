@@ -116,3 +116,30 @@ def mis_test(request):
     return JsonResponse(data_dict)
 ```
 
+在这里可以将input放入到一个form框里面，使代码更加简便化
+
+```javascript
+    <form id="form2">
+        <label for="txtuser"></label><input id="txtuser" type="text" placeholder="姓名" name="user"/>
+        <label for="txtpwd"></label><input id="txtpwd" type="text" placeholder="密码" name="pwd"/>
+    </form>
+```
+
+```javascript
+        function btnBtn2Event() {
+            $("#btn2").click(function () {
+                $.ajax({
+                    url: '/MIS/test/',
+                    type: "post",
+                    data: $("#form2").serialize(),
+                    dataType: "JSON",
+                    success: function (res) {
+                        console.log(res.data);
+                    }
+                })
+            })
+        }
+
+```
+
+`QueryDict: {'user': ['cow'], 'pwd': ['1999']}>`

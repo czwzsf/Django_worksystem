@@ -216,7 +216,7 @@ def logout(request):
 #     img.save(stream, 'png')
 #     return HttpResponse(stream.getvalue())
 def MIS(request):
-    return render(request, 'html/MIS/ajax_test.html')
+    return render(request, 'html/MIS/MIS.html')
 
 
 @csrf_exempt
