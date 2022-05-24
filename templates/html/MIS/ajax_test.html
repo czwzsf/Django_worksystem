@@ -7,8 +7,11 @@
     <h3>提交</h3>
     <input id="btn1" type="button" class="btn btn-primary" value="点击" onclick="clickMe()">
     <input id="btn3" type="button" class="btn btn-primary" value="点击">
-    <label for="txtuser"></label><input id="txtuser" type="text" placeholder="姓名"/>
-    <label for="txtpwd"></label><input id="txtpwd" type="text" placeholder="密码"/>
+    <form id="form2">
+        <label for="txtuser"></label><input id="txtuser" type="text" placeholder="姓名" name="user"/>
+        <label for="txtpwd"></label><input id="txtpwd" type="text" placeholder="密码" name="pwd"/>
+    </form>
+
     <input id="btn2" type="button" class="btn btn-primary" value="点击"/>
 {% endblock %}
 {% block js %}
@@ -29,7 +32,6 @@
         }
 
 
-
         $(function () {
             bindBtn1Event();
             btnBtn2Event();
@@ -40,10 +42,7 @@
                 $.ajax({
                     url: '/MIS/test/',
                     type: "post",
-                    data: {
-                        user: $("#txtuser").val(),
-                        pwd: $('#txtpwd').val()
-                    },
+                    data: $("#form2").serialize(),
                     dataType: "JSON",
                     success: function (res) {
                         console.log(res.data);
