@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import widgets
 
 
 class BootStrapModelForm(forms.ModelForm):

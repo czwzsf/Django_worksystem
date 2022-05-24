@@ -19,9 +19,8 @@
                         <label>部门名称</label>
                         <select class="form-control" name="depart_name">
                             {% for depart in depart_list %}
-                                <option value="{{ depart.id }}">{{ depart.title }}</option>
+                                <option value="{{ depart.id }}">{{ depart.title }}   </option>
                             {% endfor %}
-
                         </select>
                     </div>
                     <div class="form-group">

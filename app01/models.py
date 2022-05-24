@@ -22,6 +22,9 @@ class UserInfo(models.Model):
     depart = models.ForeignKey(to="DepartmentInfo", on_delete=models.CASCADE, to_field="id", default=1,
                                verbose_name='部门')
 
+    def __str__(self):
+        return self.name
+
 
 # class ServicestationInfo(models.Model):
 #     station_id = models.CharField(max_length=128)
@@ -94,3 +97,16 @@ class claimdata(models.Model):
     sortedprovidername = models.CharField(verbose_name="整理后的供应商名称", max_length=256)
     sortedprovidercode = models.CharField(verbose_name="整理后的供应商代码", max_length=32)
     sortedname_of_parts = models.CharField(verbose_name="整理后的零件名称", max_length=128)
+
+
+class Task(models.Model):
+    """项目管理"""
+    level_choices = (
+        (1, "紧急"),
+        (2, "临时"),
+        (3, "重要"),
+    )
+    level = models.SmallIntegerField(verbose_name="任务级别", choices=level_choices, default=1)
+    title = models.CharField(verbose_name="任务标题", max_length=64)
+    detail = models.TextField(verbose_name="任务详细信息")
+    user = models.ForeignKey(verbose_name="负责人", to="UserInfo", on_delete=models.CASCADE)

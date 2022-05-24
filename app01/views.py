@@ -1,3 +1,4 @@
+from django.forms import ModelForm
 from django.shortcuts import render, redirect, HttpResponse
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
@@ -7,6 +8,7 @@ from templates.utils import bootstrap
 from app01 import models
 from templates.code.verificationcode import check_code
 from io import BytesIO
+from django.forms import widgets
 
 
 # Create your views here.
@@ -224,3 +226,21 @@ def mis_test(request):
     print(request.POST)
     data_dict = {'status': True, 'data': [11, 22, 33, 44]}
     return JsonResponse(data_dict)
+
+
+class TaskModelForm(ModelForm):
+    class Meta:
+        model = models.Task
+        fields = "__all__"
+        widgets = {
+            "level": widgets.Select(attrs={'class': 'form-control', 'size': 1}),
+            "title": widgets.TextInput(attrs={'class': 'form-control'}),
+            "detail": widgets.Textarea(attrs={'class': 'form-control'}),
+            "user": widgets.Select(attrs={'class': 'form-control', 'size': 1})
+        }
+
+
+@csrf_exempt
+def task(request):
+    form = TaskModelForm()
+    return render(request, 'html/taskmanagement/task.html', {"form": form})

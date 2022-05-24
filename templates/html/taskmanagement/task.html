@@ -1,0 +1,25 @@
+{% extends 'html/master.html' %}
+{% block title %}
+    <title>任务管理功能</title>
+{% endblock %}
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">任务创建模组</div>
+        <div class="panel-body">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">建立</button>
+            </form>
+        </div>
+        <div class="panel-footer">Panel footer</div>
+    </div>
+{% endblock %}
+{% block js %}
+
+{% endblock %}
