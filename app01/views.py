@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 from django.utils.safestring import mark_safe
 from templates.utils import bootstrap
 from app01 import models
@@ -220,5 +221,5 @@ def MIS(request):
 
 @csrf_exempt
 def mis_test(request):
-    print(request.POST)
-    return HttpResponse("成功了！")
+    data_dict = {'status': True, 'data': [11, 22, 33, 44]}
+    return JsonResponse(data_dict)

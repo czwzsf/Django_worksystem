@@ -107,3 +107,12 @@ jQuery版本
         }
 ```
 
+Ajax请求的返回值一般返回json格式的，在这里我们使用Django中的`JsonResponse`来进行处理
+
+```python
+@csrf_exempt
+def mis_test(request):
+    data_dict = {'status': True, 'data': [11, 22, 33, 44]}
+    return JsonResponse(data_dict)
+```
+
