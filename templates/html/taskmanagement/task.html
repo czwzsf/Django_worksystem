@@ -6,7 +6,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">任务创建模组</div>
         <div class="panel-body">
-            <form method="post" id="formadd" >
+            <form method="post" id="formadd">
                 <div class="clearfix">
                     {% for field in form %}
                         <div class="col-xs-6">
@@ -23,7 +23,31 @@
                 </div>
             </form>
         </div>
-        <div class="panel-footer">Panel footer</div>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">任务列表</div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>任务名称</th>
+                <th>任务内容</th>
+                <th>任务级别</th>
+                <th>负责人</th>
+            </tr>
+            </thead>
+            {% for obj in quertset %}
+                <tr>
+                    <th>{{ obj.id }}</th>
+                    <th>{{ obj.title }}</th>
+                    <th>{{ obj.detail }}</th>
+                    <th>{{ obj.get_level_display }}</th>
+                    <th>{{ obj.user }}</th>
+                </tr>
+            {% endfor %}
+
+        </table>
     </div>
 {% endblock %}
 {% block js %}
@@ -43,7 +67,8 @@
                     success: function (res) {
                         if (res.status) {
                             {#console.log("添加成功！！");#}
-                            alert("添加成功");
+                            location.reload()
+                            {#alert("添加成功");#}
                         } else {
                             $.each(res.error, function (name, data) {
                                 console.log("cuole1");

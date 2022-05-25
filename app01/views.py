@@ -255,8 +255,13 @@ class TaskModelForm(ModelForm):
 
 @csrf_exempt
 def task(request):
+    querrset = models.Task.objects.all().order_by("id")
     form = TaskModelForm()
-    return render(request, 'html/taskmanagement/task.html', {"form": form})
+    context = {
+        "form": form,
+        "quertset": querrset,
+    }
+    return render(request, 'html/taskmanagement/task.html', context)
 
 
 @csrf_exempt
@@ -270,4 +275,3 @@ def task_add(request):
         return JsonResponse(data_dict)
     data_dict = {"status": False, "error": form.errors}
     return JsonResponse(data_dict)
-
