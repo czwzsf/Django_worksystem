@@ -143,3 +143,5 @@ def mis_test(request):
 ```
 
 `QueryDict: {'user': ['cow'], 'pwd': ['1999']}>`
+
+[![wakatime](https://wakatime.com/badge/user/c636fb10-cd3b-428e-8eea-8d2c6da35177/project/58426bb1-0741-436e-be94-440f69c03737.svg)](https://wakatime.com/badge/user/c636fb10-cd3b-428e-8eea-8d2c6da35177/project/58426bb1-0741-436e-be94-440f69c03737)
