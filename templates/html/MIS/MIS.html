@@ -4,24 +4,11 @@
 {% endblock %}
 {% block content %}
     <!-- Split button -->
-    <div class="btn-group">
-        <button type="button" class="btn btn-danger">车型</button>
-        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-            <span class="caret"></span>
-            <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-        </ul>
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-primary"><a href="/MIS/chart" style="color: #0f0f0f">图表</a></button>
     </div>
     <div class="btn-group">
-
-        <select class="btn btn-danger dropdown-toggle" name="depart_name" data-toggle="dropdown" aria-haspopup="true" >
+        <select class="btn btn-danger dropdown-toggle" name="depart_name" data-toggle="dropdown" aria-haspopup="true">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

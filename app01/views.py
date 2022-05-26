@@ -241,6 +241,15 @@ def mis_test(request):
     return JsonResponse(data_dict)
 
 
+def mis_chart(request):
+    return render(request, 'html/MIS/mis_chart.html')
+
+
+def mis_chart_bar(request):
+    # 构造柱状图
+    return None
+
+
 class TaskModelForm(ModelForm):
     class Meta:
         model = models.Task

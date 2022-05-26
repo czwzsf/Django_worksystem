@@ -1,0 +1,81 @@
+{% extends 'html/master.html' %}
+{% load static %}
+{% block title %}
+    <title>图表信息</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">折线图</div>
+            <div class="panel-body">
+                兔兔图图
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">柱状图</div>
+                    <div class="panel-body">
+                        <div id="m2" style="width: 1200px;height:400px;"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+
+        $(function () {
+            initBar();
+        })
+
+        /**
+         * 初始化柱状图
+         */
+        function initBar() {
+            var myChart = echarts.init(document.getElementById('m2'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '12MIS'
+                },
+                tooltip: {},
+                legend: {
+                    data: ['销量']
+                },
+                xAxis: {
+                    data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+                },
+                yAxis: {},
+                series: [
+                    {
+                        name: '销量',
+                        type: 'bar',
+                        data: [5, 20, 36, 10, 10, 20]
+                    }
+                ]
+            };
+            //发送ajax请求
+            $.ajax({
+                url: "/MIS/chart/bar/",
+                type: "get",
+                dataType: "JSON",
+                success: function (res) {
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                }
+            })
+        }
+
+        // 基于准备好的dom，初始化echarts实例
+
+    </script>
+    <script src="{% static 'js/echarts.js' %}"></script>
+{% endblock %}

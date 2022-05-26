@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-
 from app01 import views
+from app01.views import user, admin, MIS, task
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -26,20 +26,22 @@ urlpatterns = [
     # path('depart/delete/', views.depart_delete),  # 就算没有编辑网络页面，也需要在urls里面注册网址
     # path('depart/<int:nid>/edit/', views.depart_edit),
     # 用户管理
-    path('user/list/', views.user_list),
-    path('user/add/', views.user_add),
-    path('user/addmodel/', views.user_addmodel),
-    path('user/<int:nid>/edit', views.user_edit),
-    path('user/delete/', views.user_delete),
+    path('user/list/', user.user_list),
+    path('user/add/', user.user_add),
+    path('user/addmodel/', user.user_addmodel),
+    path('user/<int:nid>/edit', user.user_edit),
+    path('user/delete/', user.user_delete),
     # 管理员管理
-    path('admin/list/', views.admin_list),
+    path('admin/list/', admin.admin_list),
     # user_login
-    path('login/', views.login),
-    path('logout/', views.logout),
+    path('login/', admin.login),
+    path('logout/', admin.logout),
     # MIS计算与文件上传功能
-    path('MIS/', views.MIS),
-    path('MIS/test/', views.mis_test),
+    path('MIS/', MIS.MIS),
+    path('MIS/test/', MIS.mis_test),
+    path('MIS/chart/', MIS.mis_chart),
+    path('MIS/chart/bar', MIS.mis_chart_bar),
     # 任务管理
-    path('task/', views.task),
-    path('task/add/', views.task_add),
+    path('task/', task.task),
+    path('task/add/', task.task_add),
 ]
