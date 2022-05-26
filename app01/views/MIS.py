@@ -1,10 +1,13 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from app01 import models
 
 
 def MIS(request):
+    info = request.session.get("info")
+    if not info:
+        return redirect('/login/')
     return render(request, 'html/MIS/MIS.html')
 
 
@@ -16,6 +19,9 @@ def mis_test(request):
 
 
 def mis_chart(request):
+    info = request.session.get("info")
+    if not info:
+        return redirect('/login/')
     return render(request, 'html/MIS/mis_chart.html')
 
 
