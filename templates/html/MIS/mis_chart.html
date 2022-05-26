@@ -9,18 +9,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">折线图</div>
             <div class="panel-body">
-                兔兔图图
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">柱状图</div>
-                    <div class="panel-body">
-                        <div id="m2" style="width: 1200px;height:400px;"></div>
-
-                    </div>
-                </div>
+                <div id="m1" style="width: auto;height:400px;"></div>
             </div>
         </div>
     </div>
@@ -31,7 +20,8 @@
     <script type="text/javascript">
 
         $(function () {
-            initBar();
+            {#initBar();#}
+            initLine();
         })
 
         /**
@@ -62,6 +52,63 @@
                 dataType: "JSON",
                 success: function (res) {
                     if (res.status) {
+                        option.legend.data = res.data.legend;
+                        option.xAxis.data = res.data.x_axis;
+                        option.series = res.data.series_list;
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(option);
+                    }
+                }
+            })
+        }
+
+        /**
+         * 初始化折线图
+         */
+        function initLine() {
+
+            var chartDom = document.getElementById('m1');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: []
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: []
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: []
+            };
+            $.ajax({
+                url: "/MIS/chart/line/",
+                type: "get",
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.status) {
+                        option.title.text = res.data.title;
                         option.legend.data = res.data.legend;
                         option.xAxis.data = res.data.x_axis;
                         option.series = res.data.series_list;

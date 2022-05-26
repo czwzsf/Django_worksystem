@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from app01 import models
 
 
 def MIS(request):
@@ -37,6 +38,52 @@ def mis_chart_bar(request):
     result = {
         "status": True,
         "data": {
+            "legend": legend,
+            "series_list": series_list,
+            "x_axis": x_axis,
+        }
+    }
+    return JsonResponse(result)
+
+
+def mis_chart_line(request):
+    queryset = models.Mis.objects.all()
+    legend = ["3MIS", "6MIS", "12MIS"]
+    x_axis = []
+    data_3mis = []
+    data_6mis = []
+    data_12mis = []
+    title = queryset[0].name_of_parts + "MIS趋势图"
+    for form in queryset:
+        # 将x轴的数据写入到数组内
+        x_axis.append(form.date)
+        data_3mis.append(float(form.mis_3))
+        data_6mis.append(float(form.mis_6))
+        data_12mis.append(float(form.mis_12))
+    series_list = [
+        {
+            "name": "3MIS",
+            "type": "line",
+            "data": data_3mis,
+            "stack": "Total",
+        },
+        {
+            "name": "6MIS",
+            "type": "line",
+            "data": data_6mis,
+            "stack": "Total",
+        },
+        {
+            "name": "12MIS",
+            "type": "line",
+            "data": data_12mis,
+            "stack": "Total",
+        },
+    ]
+    result = {
+        "status": True,
+        "data": {
+            "title": title,
             "legend": legend,
             "series_list": series_list,
             "x_axis": x_axis,
