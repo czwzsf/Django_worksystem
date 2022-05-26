@@ -102,7 +102,7 @@ class claimdata(models.Model):
 class Task(models.Model):
     """项目管理"""
     level_choices = (
-        (0,""),
+        (0, ""),
         (1, "紧急"),
         (2, "临时"),
         (3, "重要"),
@@ -111,3 +111,12 @@ class Task(models.Model):
     title = models.CharField(verbose_name="任务标题", max_length=64)
     detail = models.TextField(verbose_name="任务详细信息")
     user = models.ForeignKey(verbose_name="负责人", to="UserInfo", on_delete=models.CASCADE)
+
+
+class Mis(models.Model):
+    """零部件MIS计算"""
+    name_of_parts = models.CharField(verbose_name="零部件名称", max_length=128)
+    mis_3 = models.CharField(verbose_name="3MIS", max_length=64)
+    mis_6 = models.CharField(verbose_name="6MIS", max_length=64)
+    mis_12 = models.CharField(verbose_name="12MIS", max_length=64)
+    date = models.CharField(verbose_name="日期", max_length=64)

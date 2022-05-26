@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from app01 import views
+
 from app01.views import user, admin, MIS, task
 
 urlpatterns = [
@@ -40,7 +40,7 @@ urlpatterns = [
     path('MIS/', MIS.MIS),
     path('MIS/test/', MIS.mis_test),
     path('MIS/chart/', MIS.mis_chart),
-    path('MIS/chart/bar', MIS.mis_chart_bar),
+    path('MIS/chart/bar/', MIS.mis_chart_bar),
 
     # 任务管理
     path('task/', task.task),

@@ -1,14 +1,6 @@
-import json
-
-from django import forms
-from django.forms import ModelForm
-from django.forms import widgets
 from django.http import JsonResponse
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
-from app01 import models
-from templates.utils import bootstrap
 
 
 def MIS(request):
@@ -28,4 +20,26 @@ def mis_chart(request):
 
 def mis_chart_bar(request):
     # 构造柱状图
-    return None
+    legend = ['chenzhewei', 'hll']
+    series_list = [
+        {
+            "name": "chenzhewei",
+            "type": 'bar',
+            "data": [1, 2, 3, 4, 5, 6]
+        },
+        {
+            "name": "hll",
+            "type": 'bar',
+            "data": [2, 3, 4, 5, 6, 7]
+        }
+    ]
+    x_axis = ['1月', '2月', '3月', '4月', '5月', '6月']
+    result = {
+        "status": True,
+        "data": {
+            "legend": legend,
+            "series_list": series_list,
+            "x_axis": x_axis,
+        }
+    }
+    return JsonResponse(result)

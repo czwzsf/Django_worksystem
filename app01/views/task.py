@@ -1,14 +1,10 @@
-import json
-
-from django import forms
 from django.forms import ModelForm
 from django.forms import widgets
 from django.http import JsonResponse
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from app01 import models
-from templates.utils import bootstrap
 
 
 class TaskModelForm(ModelForm):
@@ -25,18 +21,17 @@ class TaskModelForm(ModelForm):
 
 @csrf_exempt
 def task(request):
-    querrset = models.Task.objects.all().order_by("id")
+    queryset = models.Task.objects.all().order_by("id")
     form = TaskModelForm()
     context = {
         "form": form,
-        "quertset": querrset,
+        "queryset": queryset,
     }
     return render(request, 'html/taskmanagement/task.html', context)
 
 
 @csrf_exempt
 def task_add(request):
-    print(request.POST)
     # 表单请求校验
     form = TaskModelForm(data=request.POST)
     if form.is_valid():

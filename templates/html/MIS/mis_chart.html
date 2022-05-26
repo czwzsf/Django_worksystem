@@ -47,19 +47,13 @@
                 },
                 tooltip: {},
                 legend: {
-                    data: ['销量']
+                    data: [],
                 },
                 xAxis: {
-                    data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+                    data: [],
                 },
                 yAxis: {},
-                series: [
-                    {
-                        name: '销量',
-                        type: 'bar',
-                        data: [5, 20, 36, 10, 10, 20]
-                    }
-                ]
+                series: []
             };
             //发送ajax请求
             $.ajax({
@@ -67,15 +61,16 @@
                 type: "get",
                 dataType: "JSON",
                 success: function (res) {
-
-                    // 使用刚指定的配置项和数据显示图表。
-                    myChart.setOption(option);
+                    if (res.status) {
+                        option.legend.data = res.data.legend;
+                        option.xAxis.data = res.data.x_axis;
+                        option.series = res.data.series_list;
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(option);
+                    }
                 }
             })
         }
-
-        // 基于准备好的dom，初始化echarts实例
-
     </script>
     <script src="{% static 'js/echarts.js' %}"></script>
 {% endblock %}
