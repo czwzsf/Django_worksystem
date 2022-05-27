@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from app01 import models
@@ -8,7 +8,15 @@ def MIS(request):
     info = request.session.get("info")
     if not info:
         return redirect('/login/')
-    return render(request, 'html/MIS/MIS.html')
+    if request.method == "GET":
+        return render(request, 'html/MIS/MIS.html')
+    file_object = request.FILES.get("filename")
+    f = open('a1.png', mode="wb")
+    for chunk in file_object.chunks():
+        f.write(chunk)
+    f.close()
+    return HttpResponse("上传成功！")
+    # return render(request, 'html/MIS/MIS.html')
 
 
 @csrf_exempt

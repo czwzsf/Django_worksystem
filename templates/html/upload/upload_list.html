@@ -1,13 +1,10 @@
 {% extends 'html/master.html' %}
 {% block title %}
-    <title>MIS信息计算系统</title>
+    <title>文件上传</title>
 {% endblock %}
+
 {% block content %}
-    <!-- Split button -->
-    <div class="btn-group container" role="group" aria-label="...">
-        <button type="button" class="btn btn-primary"><a href="/MIS/chart" style="color: #0f0f0f">图表</a></button>
-    </div>
-    <div>
+    <div class="container">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="text" name="name">
@@ -15,9 +12,4 @@
             <input type="submit" value="提交">
         </form>
     </div>
-
-{% endblock %}
-
-{% block js %}
-
 {% endblock %}

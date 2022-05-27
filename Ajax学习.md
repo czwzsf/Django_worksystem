@@ -186,3 +186,41 @@ def mis_test(request):
 
 ### 文件上传
 
+#### 基本操作
+
+```html
+{% extends 'html/master.html' %}
+{% block title %}
+    <title>文件上传</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="name">
+            <input type="file" name="filename">
+            <input type="submit" value="提交">
+        </form>
+    </div>
+{% endblock %}
+```
+
+```python
+# 请求体中的数据
+print(request.POST)  # <QueryDict: {'name': ['czw']}>
+# 请求发过来的文件
+print(request.FILES)  # <MultiValueDict: {'filename': [<InMemoryUploadedFile: Ajax学习.md (text/markdown)>]}>
+return HttpResponse("文件上传成功了")
+
+```
+
+```python
+    # 文件读取
+  	file_object = request.FILES.get("filename")
+    f = open('a1.png', mode="wb")
+    for chunk in file_object.chunks():
+        f.write(chunk)
+    f.close()
+```
+
