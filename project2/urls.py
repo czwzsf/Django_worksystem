@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from app01.views import user, admin, MIS, task
+from app01.views import user, admin, MIS, task, upload
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -41,9 +41,11 @@ urlpatterns = [
     path('MIS/test/', MIS.mis_test),
     path('MIS/chart/', MIS.mis_chart),
     path('MIS/chart/bar/', MIS.mis_chart_bar),
-    path('MIS/chart/line/',MIS.mis_chart_line),
+    path('MIS/chart/line/', MIS.mis_chart_line),
 
     # 任务管理
     path('task/', task.task),
     path('task/add/', task.task_add),
+    # 文件上传
+    path('upload/list/',upload.upload_list),
 ]
