@@ -42,6 +42,7 @@ urlpatterns = [
     path('MIS/chart/', MIS.mis_chart),
     path('MIS/chart/bar/', MIS.mis_chart_bar),
     path('MIS/chart/line/', MIS.mis_chart_line),
+    path('MIS/upload/', MIS.mis_upload),
     # 任务管理
     path('task/', task.task),
     path('task/add/', task.task_add),

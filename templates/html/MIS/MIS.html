@@ -4,17 +4,28 @@
 {% endblock %}
 {% block content %}
     <!-- Split button -->
-    <div class="btn-group container" role="group" aria-label="...">
-        <button type="button" class="btn btn-primary"><a href="/MIS/chart" style="color: #0f0f0f">图表</a></button>
+    <div class="panel panel-default container">
+        <div class="panel-heading">文件上传</div>
+        <div class="panel-body">
+            <form method="post" enctype="multipart/form-data" action="/MIS/upload/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="file" name="filename">
+                </div>
+                <input type="submit" value="提交" class="btn btn-info">
+            </form>
+        </div>
     </div>
-    <div>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="text" name="name">
-            <input type="file" name="filename">
-            <input type="submit" value="提交">
-        </form>
+    <div class="panel panel-default container">
+        <div class="panel-heading">MIS图表</div>
+        <div class="panel-body">
+            <div class="btn-group container" role="group" aria-label="...">
+                <button type="button" class="btn btn-primary"><a href="/MIS/chart/" style="color: #0f0f0f">图表</a>
+                </button>
+            </div>
+        </div>
     </div>
+
 
 {% endblock %}
 

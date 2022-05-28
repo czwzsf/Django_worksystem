@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render, redirect
 
 from app01 import models
@@ -14,14 +15,15 @@ def admin_list(request):
     return render(request, 'html/admin/admin_list.html', context)
 
 
-class LoginForm(UserModelForm):
-    # name = forms.CharField(label='username', widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
-    # password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={"class": "form-control"}),
-    #                            required=True)
-    # image_code = forms.CharField(label='image_code', widget=forms.TextInput(), required=True)
+class LoginForm(forms.ModelForm):
     class Meta:
         model = models.UserInfo
         fields = {"name", "password"}
+    name = forms.CharField(label='username', widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
+    password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={"class": "form-control"}),
+                               required=True)
+    # image_code = forms.CharField(label='image_code', widget=forms.TextInput(), required=True)
+
 
 
 # class LoginForm(bootstrap.BootStrapModelForm):
